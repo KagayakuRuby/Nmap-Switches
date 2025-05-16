@@ -86,3 +86,42 @@ Requires root access (operates at a lower network layer).
 |------------------	|-----------------	|-------------	|---------	|--------	|
 | TCP Connect(-sT) 	| ✔️               	| ❌           	| ❌       	| Medium 	|
 | SYN Scan(-sS)    	| ❌               	| ✔️           	| ✔️       	| Fast   	|
+
+
+<h2 id="-sS">SYN Half-Open Scan (-sS)</h2> :
+
+
+Mechanism of -sS (SYN Scan):  
+The SYN scan (half-open scan) detects the status of target ports by sending a SYN packet to the port and analyzing the response.  
+
+
+ TCP 3-Way Handshake Process:  
+1. Send SYN:  
+   - A packet with the SYN flag is sent to the target port.  
+
+2. Server Response:  
+   - If the port is open:  
+     - The server replies with a SYN/ACK packet.  
+     - Nmap sends an RST to terminate the connection.  
+   - If the port is closed:  
+     - The server replies with an RST packet.  
+
+3. Handshake Not Completed:  
+   - Unlike the TCP Connect Scan, the connection is not fully established (no final ACK sent by Nmap).  
+
+
+
+| Port status 	| Server response           	| Result in nmap 	|
+|-------------	|---------------------------	|----------------	|
+| Open        	| SYN/ACK → RST is Sent     	| Open           	|
+| Closed      	| RST                       	| Closed         	|
+| Filtered    	| ICMP Error / Not response 	| Filtered       	|
+
+-Advantages and disadvantages
+
+
+| Advantages                                                                                                     	| Disadvantages                                                                                                                        	|
+|--------------------------------------------------------------------------------------------------------------	|--------------------------------------------------------------------------------------------------------------------------------------	|
+| Harder to detect by IDS/Firewalls: SYN scans avoid completing the TCP handshake, reducing detection chances. 	| Requires root/administrator privileges: On Linux, raw socket access (root) is needed to craft SYN packets.                           	|
+| Faster than TCP Connect Scan: No time wasted on full handshake completion.                                   	| May crash unstable services: Sending abrupt RST packets can disrupt poorly configured or vulnerable services                         	|
+| Minimal logging: Since the connection is never fully established, fewer traces are left in logs.             	| Windows compatibility issues: Windows systems may require additional configurations (e.g., Npcap drivers) for raw packet operations. 	|
