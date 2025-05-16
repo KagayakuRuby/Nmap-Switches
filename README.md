@@ -5,16 +5,16 @@ Source:[tryhackme.com] , [nmap.org]
 
 1)Main and frequently used scans:
 
--[TCP Connect Scan](#-sT)
--[SYN Half-Open Scan](#-sS)
--[UDP Scan](#-sU)
+- [TCP Connect Scan](#-sT)
+- [SYN Half-Open Scan](#-sS)
+- [UDP Scan](#-sU)
 
 2)More advanced scans:(Less commonly used)
 
--[TCP Null Scan](#-sN)
--[SYN Fin Scan](#-sF)
--[TCP XMAS Scan](#-sX)
--[ICMP](#Ping-Scan)
+- [TCP Null Scan](#-sN)
+- [SYN Fin Scan](#-sF)
+- [TCP XMAS Scan](#-sX)
+- [ICMP](#Ping-Scan)
 
 
 <h2 id="-sT">TCP Connect Scan (-sT)</h2>
@@ -64,17 +64,18 @@ iptables -I INPUT -p tcp --dport 80 -j REJECT --reject-with tcp-reset
 ```
 
 Key Notes:
-1.-sT Scan (TCP Connect Scan):
+
+1. -sT Scan (TCP Connect Scan):
 
 Suitable for legal/compliance audits where root access is unavailable.
 
 Poor stealth option for penetration testing (leaves clear logs in firewalls).
 
-2.Advanced Firewall Environments:
+2. Advanced Firewall Environments:
 
 Combining -sT scans with other techniques (e.g., UDP scans or NSE scripts) is essential to bypass defenses.
 
-3.Reducing Detection Risk:
+3. Reducing Detection Risk:
 
 Use SYN scans (-sS) for stealthier scanning.
 
@@ -88,7 +89,7 @@ Requires root access (operates at a lower network layer).
 | SYN Scan(-sS)    	| ❌               	| ✔️           	| ✔️       	| Fast   	|
 
 
-<h2 id="-sS">SYN Half-Open Scan (-sS)</h2> :
+<h2 id="-sS">SYN Half-Open Scan (-sS)</h2> 
 
 
 Mechanism of -sS (SYN Scan):  
