@@ -27,7 +27,7 @@ Steps:
 
 2.Nmap marks the port as open → Sent back to Nmap → If the port responds with SYN/ACK
 
-3.If the port is closed → RST (Reset) packet is sent → Port is marked as closed.
+3.If the port is closed → RST (Reset) packet is sent → Nmap marks the port as closed.
 
 4.If a firewall drops the packets → No response is received → Port is marked as filtered.
 
