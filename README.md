@@ -16,7 +16,7 @@ Source:[tryhackme.com] , [nmap.org]
 -[TCP XMAS Scan](#-sX)
 -[ICMP](#Ping-Scan)
 
-## TCP Connect Scan(-sT):
+## -sT:
 Scanning Mechanism:
 The -sT scan detects port status by performing a full TCP three-way handshake.
 
