@@ -42,7 +42,7 @@ Example:
 ```bash
 nmap -sT 192.168.1.1
 ```
--Scan for specific ports
+- Scan for specific ports
 ```bash
 nmap -sT -p 80,443,22 192.168.1.1
 ```
