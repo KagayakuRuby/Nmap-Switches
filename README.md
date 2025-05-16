@@ -17,7 +17,7 @@ Source:[tryhackme.com] , [nmap.org]
 -[ICMP](#Ping-Scan)
 
 
-## TCP Connect Scan (-sT) {#-sT}
+## TCP Connect Scan (-sT) #-sT :
 Scanning Mechanism:
 The -sT scan detects port status by performing a full TCP three-way handshake.
 
