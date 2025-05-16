@@ -17,7 +17,7 @@ Source:[tryhackme.com] , [nmap.org]
 -[ICMP](#Ping-Scan)
 
 
-<h2 id="-sT">TCP Connect Scan (-sT)</h2> :
+<h2 id="-sT">TCP Connect Scan (-sT)</h2>
 Scanning Mechanism:
 The -sT scan detects port status by performing a full TCP three-way handshake.
 
@@ -47,7 +47,7 @@ nmap -sT 192.168.1.1
 nmap -sT -p 80,443,22 192.168.1.1
 ```
 
--Impact of Firewalls:
+- Impact of Firewalls
 
 1. Firewalls that Drop Packets (No Response):
 Behavior: When a firewall silently drops incoming packets (e.g., no SYN/ACK or RST response), Nmap waits for a timeout.
@@ -117,7 +117,7 @@ The SYN scan (half-open scan) detects the status of target ports by sending a SY
 | Closed      	| RST                       	| Closed         	|
 | Filtered    	| ICMP Error / Not response 	| Filtered       	|
 
--Advantages and disadvantages
+- Advantages and disadvantages
 
 
 | Advantages                                                                                                     	| Disadvantages                                                                                                                        	|
