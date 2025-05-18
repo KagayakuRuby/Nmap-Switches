@@ -1,7 +1,7 @@
 # Nmap Switches
 
-*Note : In this repository, I plan to explain some of the important Nmap switches along with the use of its scripts and give you some examples(For those who are new to working with Nmap).
-Source:[tryhackme.com] , [nmap.org]
+Note : In this repository, I plan to explain some of the important Nmap switches along with the use of its scripts and give you some examples(For those who are new to working with Nmap).
+
 
 1)Main and frequently used scans:
 
@@ -126,3 +126,54 @@ The SYN scan (half-open scan) detects the status of target ports by sending a SY
 | Harder to detect by IDS/Firewalls: SYN scans avoid completing the TCP handshake, reducing detection chances. 	| Requires root/administrator privileges: On Linux, raw socket access (root) is needed to craft SYN packets.                           	|
 | Faster than TCP Connect Scan: No time wasted on full handshake completion.                                   	| May crash unstable services: Sending abrupt RST packets can disrupt poorly configured or vulnerable services                         	|
 | Minimal logging: Since the connection is never fully established, fewer traces are left in logs.             	| Windows compatibility issues: Windows systems may require additional configurations (e.g., Npcap drivers) for raw packet operations. 	|
+
+
+SYN Scan vs. TCP Connect Scan:
+
+| Feature          | SYN Scan (-sS)                     | TCP Connect Scan (-sT)         |
+|----------------------|----------------------------------------|------------------------------------|
+| Root Access      | Required                               | Not required                       |
+| Speed            | Fast                                   | Slow                               |
+| Stealth          | Stealthier (no full handshake)         | Less stealthy (completes handshake)|
+| Service Impact   | May disrupt unstable services          | Minimal impact                     |
+
+
+
+<h2 id="-sU">UDP Scan (-sS)</h2> 
+
+ UDP Scan Mechanism
+- Protocol: Connectionless (no TCP handshake).  
+- Challenge: Detecting open UDP ports due to default lack of response.  
+
+Port Status Detection:  
+- Open Port: Usually no response (rarely, a UDP response may indicate openness).  
+- Closed Port: ICMP "Port Unreachable" response.  
+- Filtered Port: No response (firewall drops packets) → Reported as Open/Filtered.  
+
+UDP Scan Challenges & Advantages
+| Challenges                     | Advantages                          |
+|------------------------------------|-----------------------------------------|
+| Very slow (e.g., ~20 minutes)      | Identifies critical UDP services (DNS, DHCP). |
+| Ambiguous results for Open/Filtered| Detects closed ports via ICMP responses. |
+
+ Commands for UDP Scanning
+1. Fast Scan (Top Ports):  
+   ```bash
+   nmap -sU --top-ports 20 192.168.1.1
+   ```
+2. Targeted Port Scan:  
+   ```bash
+   nmap -sU -p53,161,123 -T4 192.168.1.1
+   ```
+Note: Full UDP scans are not recommended due to extreme slowness.
+
+---
+
+ TCP vs. UDP Scan Comparison
+| Feature      | UDP Scan (-sU)                      | TCP SYN Scan (-sS)              |
+|------------------|-----------------------------------------|-------------------------------------|
+| Protocol     | Connectionless (UDP)                    | Connection-oriented (TCP)           |
+| Speed        | Very slow                               | Fast                                |
+| Accuracy     | Ambiguous for Open/Filtered ports       | High accuracy for open/closed ports |
+| Root Access  | Not required                            | Required                            |
+
