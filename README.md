@@ -183,23 +183,27 @@ Note: Full UDP scans are not recommended due to extreme slowness.
    - Sends a TCP packet without any flags.  
    - Response Analysis:  
      - No response: Port marked as Open/Filtered.  
-     - RST response: Port marked as Closed.  
+     - RST response: Port marked as Closed.
+
+     
 <h2 id="-sF"> FIN Scan (-sF)</h2>
 
    - Sends a TCP packet with the FIN flag (typically used to close connections).  
-   - Response Analysis: Same as Null Scan.  
+   - Response Analysis: Same as Null Scan.
+   
 <h2 id="-sX">Xmas Scan (-sX)</h2>
 
    - Sends a TCP packet with FIN, URG, and PSH flags (like a "lit-up" Christmas tree).  
    - Response Analysis:  
      - No response: Port marked as Open/Filtered.  
      - RST response: Port marked as Closed.
-     - 
+    
 <h2 id="-sM">Maimon Scan (-sM)</h2>
    - Sends a TCP packet with FIN/ACK flags.  
    - Some systems (e.g., BSD) respond with RST for closed ports.  
 
 Firewall Detection & OS Compatibility:  
+
 | Scan Type | Flags Sent | Firewall Detection Risk | Windows Compatibility |  
 |---------------|----------------|------------------------------|---------------------------|  
 | Null          | None           | Medium                       | ❌                        |  
