@@ -15,7 +15,10 @@ Note : In this repository, I plan to explain some of the important Nmap switches
 - [SYN Fin Scan](#-sF)
 - [TCP XMAS Scan](#-sX)
 - [Maimon Scan](#-sM)
-- [ICMP](#Ping-Scan)
+- [Ping Sweep](#-sn)
+
+3)NSE Scripts:
+[All Scripts](#Scripts)
 
 
 <h2 id="-sT">TCP Connect Scan (-sT)</h2>
@@ -215,3 +218,61 @@ Firewall Detection & OS Compatibility:
 | Xmas          | FIN, URG, PSH  | High                         | ❌                        |  
 
 
+<h2 id="-sn">Ping Sweep (-sn)</h2>
+
+- Purpose: Discovers live hosts in a network without port scanning.
+   
+- Methods:  
+  - Sends ICMP Echo Requests (blocked by some firewalls).  
+  - Fallback to TCP SYN (port 443/80) or ARP requests (in local networks).  
+
+Commands:  
+```bash  
+nmap -sn 192.168.0.0/24                  # Scan entire subnet
+nmap -sn 192.168.0.1-254                 # Scan IP range  
+nmap -sn 192.168.0.0/24 -oN ping.txt     # Save results to a file 
+```  
+
+Limitations:  
+
+- Inaccurate if ICMP is blocked.  
+- Use -Pn to skip host discovery and scan all ports (even if host appears dead).  
+
+## Nmap Scripting Engine (NSE)  
+
+<h2 id="Scripts">NSE Scripts</h2>
+
+
+- Categories:
+  
+  | Category | Description                                | Example Scripts                |  
+  |--------------|-----------------------------------------------|------------------------------------|  
+  | safe       | Non-intrusive scripts (e.g., version detection). | http-server-header              |  
+  | intrusive  | May disrupt services (e.g., vulnerability checks). | ssl-heartbleed                 |  
+  | vuln       | Scans for known vulnerabilities.               | smb-vuln-ms17-010               |  
+  | exploit    | Attempts to exploit vulnerabilities.           | ftp-brute                      |  
+  | auth       | Checks for anonymous access (e.g., FTP).       | ftp-anon                       |  
+  | brute      | Performs brute-force attacks (e.g., SSH).      | ssh-brute                       |  
+  | discovery  | Gathers network/device info.                   | snmp-info                       |  
+
+
+Usage Examples:  
+```bash  
+nmap --script vuln,brute 192.168.1.1       #Run specific scripts  
+nmap --script "category=safe" 192.168.1.1  #Run all safe scripts  
+nmap --script-updatedb                     #Update script database  
+```  
+
+## Firewall Evasion Tips  
+
+1. Bypass ICMP Blocking:  
+   - Use `-Pn` to skip host discovery and assume all hosts are alive.
+2. Fragment Packets:  
+   - Use `-f` or `--mtu` to split packets into smaller fragments, evading IDS/firewalls.  
+3. Spoof MAC Addresses:  
+   - Use `--spoof-mac` to mask your device’s MAC address.  
+
+Example:  
+```bash  
+nmap -sS -f -Pn -T4 192.168.1.1   #Stealthy SYN scan with fragmentation  
+```  
