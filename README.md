@@ -14,6 +14,7 @@ Note : In this repository, I plan to explain some of the important Nmap switches
 - [TCP Null Scan](#-sN)
 - [SYN Fin Scan](#-sF)
 - [TCP XMAS Scan](#-sX)
+- [Maimon Scan](#-sM)
 - [ICMP](#Ping-Scan)
 
 
@@ -167,7 +168,6 @@ UDP Scan Challenges & Advantages
    ```
 Note: Full UDP scans are not recommended due to extreme slowness.
 
----
 
  TCP vs. UDP Scan Comparison
 | Feature      | UDP Scan (-sU)                      | TCP SYN Scan (-sS)              |
@@ -176,4 +176,34 @@ Note: Full UDP scans are not recommended due to extreme slowness.
 | Speed        | Very slow                               | Fast                                |
 | Accuracy     | Ambiguous for Open/Filtered ports       | High accuracy for open/closed ports |
 | Root Access  | Not required                            | Required                            |
+
+
+## Advanced TCP Scans 
+<h2 id="-sN"> Null Scan (-sN)</h2>
+   - Sends a TCP packet without any flags.  
+   - Response Analysis:  
+     - No response: Port marked as Open/Filtered.  
+     - RST response: Port marked as Closed.  
+<h2 id="-sF"> FIN Scan (-sF)</h2>
+
+   - Sends a TCP packet with the FIN flag (typically used to close connections).  
+   - Response Analysis: Same as Null Scan.  
+<h2 id="-sX">Xmas Scan (-sX)</h2>
+
+   - Sends a TCP packet with FIN, URG, and PSH flags (like a "lit-up" Christmas tree).  
+   - Response Analysis:  
+     - No response: Port marked as Open/Filtered.  
+     - RST response: Port marked as Closed.
+     - 
+<h2 id="-sM">Maimon Scan (-sM)</h2>
+   - Sends a TCP packet with FIN/ACK flags.  
+   - Some systems (e.g., BSD) respond with RST for closed ports.  
+
+Firewall Detection & OS Compatibility:  
+| Scan Type | Flags Sent | Firewall Detection Risk | Windows Compatibility |  
+|---------------|----------------|------------------------------|---------------------------|  
+| Null          | None           | Medium                       | ❌                        |  
+| FIN           | FIN            | Medium                       | ❌                        |  
+| Xmas          | FIN, URG, PSH  | High                         | ❌                        |  
+
 
