@@ -188,9 +188,9 @@ Note: Full UDP scans are not recommended due to extreme slowness.
      
 <h2 id="-sF"> FIN Scan (-sF)</h2>
 
-   -  Sends a TCP packet with the FIN flag (typically used to close connections).
+- Sends a TCP packet with the FIN flag (typically used to close connections).
 
-   -  Response Analysis: Same as Null Scan.
+- Response Analysis: Same as Null Scan.
 
    
 <h2 id="-sX">Xmas Scan (-sX)</h2>
