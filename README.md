@@ -188,8 +188,8 @@ Note: Full UDP scans are not recommended due to extreme slowness.
      
 <h2 id="-sF"> FIN Scan (-sF)</h2>
 
-   - Sends a TCP packet with the FIN flag (typically used to close connections).  
-   - Response Analysis: Same as Null Scan.
+   -  Sends a TCP packet with the FIN flag (typically used to close connections).  
+   -  Response Analysis: Same as Null Scan.
    
 <h2 id="-sX">Xmas Scan (-sX)</h2>
 
@@ -199,8 +199,9 @@ Note: Full UDP scans are not recommended due to extreme slowness.
      - RST response: Port marked as Closed.
     
 <h2 id="-sM">Maimon Scan (-sM)</h2>
-   - Sends a TCP packet with FIN/ACK flags.  
-   - Some systems (e.g., BSD) respond with RST for closed ports.  
+
+   -  Sends a TCP packet with FIN/ACK flags.  
+   -  Some systems (e.g., BSD) respond with RST for closed ports.  
 
 Firewall Detection & OS Compatibility:  
 
