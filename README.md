@@ -180,6 +180,7 @@ Note: Full UDP scans are not recommended due to extreme slowness.
 
 ## Advanced TCP Scans 
 <h2 id="-sN"> Null Scan (-sN)</h2>
+
    - Sends a TCP packet without any flags.  
    - Response Analysis:  
      - No response: Port marked as Open/Filtered.  
