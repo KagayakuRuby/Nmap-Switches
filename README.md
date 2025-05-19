@@ -36,7 +36,7 @@ Steps:
 
 4.If a firewall drops the packets → No response is received → Port is marked as filtered.
 
-| Port status | Respond              | Namp Result |
+| Port status | Respond              | Nmap Result |
 |-------------|----------------------|-------------|
 | Open        | SYN/ACK              | Open        |
 | Close       | RST                  | Close       |
